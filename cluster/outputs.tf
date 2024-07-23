@@ -10,5 +10,6 @@ output "cluster_ca" {
 }
 
 output "cluster_token" {
+  sensitive = true
   value = data.aws_eks_cluster_auth.demo.token
 }
