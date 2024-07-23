@@ -47,3 +47,7 @@ resource "aws_eks_node_group" "demo" {
     aws_iam_role_policy_attachment.demo-AmazonEC2ContainerRegistryReadOnly,
   ]
 }
+
+data "aws_eks_cluster_auth" "demo" {
+  name = aws_eks_cluster.demo.name
+}
