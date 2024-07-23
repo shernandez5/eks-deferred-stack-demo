@@ -21,7 +21,7 @@ provider "aws" "main" {
 
 provider "kubernetes" "main" {
   config {
-    host                   = component.cluster.cluster_api
+    host                   = component.cluster.cluster_url
     cluster_ca_certificate = component.cluster.cluster_ca
     token                  = component.cluster.cluster_token
   }
