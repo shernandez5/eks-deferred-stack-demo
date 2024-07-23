@@ -14,3 +14,11 @@ component "cluster" {
     region = var.region
   }
 }
+
+component "kube" {
+  source = "./kube"
+
+  providers = {
+    kubernetes = provider.kubernetes.main
+  }
+}
