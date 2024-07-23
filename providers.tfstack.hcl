@@ -3,10 +3,10 @@ required_providers {
     source  = "hashicorp/aws"
     version = "~> 5.59.0"
   }
-#   kubernetes = {
-#     source  = "hashicorp/kubernetes"
-#     version = "~> 2.31.0"
-#   }
+  kubernetes = {
+    source  = "hashicorp/kubernetes"
+    version = "~> 2.31.0"
+  }
 }
 
 provider "aws" "main" {

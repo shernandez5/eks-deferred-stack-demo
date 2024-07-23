@@ -1,6 +1,15 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
+terraform {
+  required_providers {
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "~> 2.31.0"
+    }
+  }
+}
+
 resource "kubernetes_namespace_v1" "demo_ns" {
   metadata {
     name = "demo-ns"
