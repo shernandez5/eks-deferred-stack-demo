@@ -17,6 +17,6 @@ variable "role_arn" {
   type = string
 }
 
-variable "identity_token_file" {
+variable "identity_token" {
   type = string
 }
