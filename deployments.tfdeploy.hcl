@@ -8,7 +8,7 @@ identity_token "aws" {
 deployment "demo" {
     inputs = {
         cluster_name        = "stacks-demo"
-        kubernetes_version  = "1.29"
+        kubernetes_version  = "1.30"
         region              = "eu-central-1"
         role_arn            = "arn:aws:iam::403410321276:role/tfc-role"
         identity_token_file = identity_token.aws.jwt_filename
