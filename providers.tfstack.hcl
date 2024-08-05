@@ -7,6 +7,10 @@ required_providers {
     source  = "hashicorp/kubernetes"
     version = "~> 2.31.0"
   }
+  random = {
+    source = "hashicorp/random"
+    version = "~> 3.6.2"
+  }
 }
 
 provider "aws" "main" {
@@ -26,3 +30,5 @@ provider "kubernetes" "main" {
     token                  = component.cluster.cluster_token
   }
 }
+
+provider "random" "main" {}

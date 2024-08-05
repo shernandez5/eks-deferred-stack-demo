@@ -6,6 +6,7 @@ component "cluster" {
 
   providers = {
     aws = provider.aws.main
+    random = provider.random.main
   }
 
   inputs = {
