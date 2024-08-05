@@ -10,8 +10,18 @@ terraform {
   }
 }
 
+resource "random_string" "demo" {
+  length = 4
+  special = false
+  upper = false
+}
+
+locals {
+  cluster_name = "${var.cluster_name}-${random_string.demo.result}"
+}
+
 resource "aws_eks_cluster" "demo" {
-  name     = var.cluster_name
+  name     = local.cluster_name
   version  = var.kubernetes_version
   role_arn = aws_iam_role.demo-cluster.arn
 
@@ -29,7 +39,7 @@ resource "aws_eks_cluster" "demo" {
 
 resource "aws_eks_node_group" "demo" {
   cluster_name    = aws_eks_cluster.demo.name
-  node_group_name = "${var.cluster_name}-default"
+  node_group_name = "${local.cluster_name}-default"
   node_role_arn   = aws_iam_role.demo-node.arn
   subnet_ids      = aws_subnet.demo.*.id
 

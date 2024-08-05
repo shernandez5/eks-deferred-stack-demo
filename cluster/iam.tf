@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MPL-2.0
 
 resource "aws_iam_role" "demo-cluster" {
-  name = var.cluster_name
+  name = local.cluster_name
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -31,7 +31,7 @@ resource "aws_iam_role_policy_attachment" "demo-AmazonEKSVPCResourceController" 
 }
 
 resource "aws_iam_role" "demo-node" {
-  name = "${var.cluster_name}-node"
+  name = "${local.cluster_name}-node"
 
   assume_role_policy = jsonencode({
     Statement = [{
