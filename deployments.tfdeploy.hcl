@@ -15,3 +15,14 @@ deployment "development" {
     default_tags        = { stacks-preview-example = "eks-deferred-stack" }
   }
 }
+
+deployment "production" {
+  inputs = {
+    cluster_name        = "stacks-production-demo"
+    kubernetes_version  = "1.30"
+    region              = "us-east-1"
+    role_arn            = "arn:aws:iam::225401527358:role/lambda-component-expansion-stack"
+    identity_token      = identity_token.aws.jwt
+    default_tags        = { stacks-preview-example = "eks-deferred-stack" }
+  }
+}

@@ -17,7 +17,7 @@ component "cluster" {
 }
 
 component "kube" {
-  source = "./kube"
+  source = "git::https://github.com/shernandez5/kube-module.git"
 
   providers = {
     kubernetes = provider.kubernetes.main
