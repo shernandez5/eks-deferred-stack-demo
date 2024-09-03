@@ -14,6 +14,10 @@ required_providers {
     source = "hashicorp/random"
     version = "~> 3.6.2"
   }
+  tfe = {
+    source  = "hashicorp/tfe"
+    version = "0.57.0"
+  }
 }
 
 provider "aws" "main" {
@@ -36,6 +40,14 @@ provider "kubernetes" "main" {
     host                   = component.cluster.cluster_url
     cluster_ca_certificate = component.cluster.cluster_ca
     token                  = component.cluster.cluster_token
+  }
+}
+
+provider "tfe" "main" {
+  config {
+    hostname     = var.tfe_hostname
+    organization = var.tfe_organization
+    token        = var.tfe_token
   }
 }
 
