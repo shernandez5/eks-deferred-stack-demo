@@ -40,7 +40,7 @@ deployment "development" {
     oauth_client_name   = local.oauth_client_name
     tfe_organization    = local.tfe_organization
     tfe_project_name    = local.tfe_project_name
-    tfe_token           = "1234" #store.varset.tokens.local_tfe_token
+    tfe_token           = store.varset.tokens.local_tfe_token
   }
 }
 
@@ -59,7 +59,7 @@ deployment "production" {
     oauth_client_name   = local.oauth_client_name
     tfe_organization    = local.tfe_organization
     tfe_project_name    = local.tfe_project_name
-    tfe_token           = "1234" #store.varset.tokens.local_tfe_token
+    tfe_token           = store.varset.tokens.local_tfe_token
   }
 }
 
@@ -70,9 +70,9 @@ orchestrate "auto_approve" "safe_plans" {
     reason    = "Plan has ${context.plan.changes.remove} resources to be destroyed."
   }
 
-  # Ensure that the deployment is not production or disaster-recovery
+  # Ensure that the deployment is not production
   check {
-    condition = context.plan.deployment != "production"
+    condition = context.plan.deployment != deployment.production
     reason    = "Production plans are not eligible for auto_approve."
   }
 }
