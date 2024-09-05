@@ -13,3 +13,7 @@ output "cluster_token" {
   sensitive = true
   value = data.aws_eks_cluster_auth.demo.token
 }
+
+output "filtered_azs" {
+  value = [for az in data.aws_availability_zones.available.names : az if az != "us-east-1e"]
+}

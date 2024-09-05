@@ -5,11 +5,13 @@ data "aws_region" "current" {
 }
 
 data "aws_availability_zones" "available" {
+  state = "available"
 }
 
 locals {
   tagName = "hcp-terraform-eks-demo-node"
-  azCount = length(data.aws_availability_zones.available.names)
+  eks_azs = [for az in data.aws_availability_zones.available.names : az if az != "us-east-1e"]
+  azCount = length(local.eks_azs)
 }
 
 resource "aws_vpc" "demo" {
@@ -25,7 +27,7 @@ resource "aws_vpc" "demo" {
 resource "aws_subnet" "demo" {
   count = local.azCount
 
-  availability_zone       = data.aws_availability_zones.available.names[count.index]
+  availability_zone       = local.eks_azs[count.index]
   cidr_block              = "10.0.${count.index}.0/24"
   vpc_id                  = aws_vpc.demo.id
   map_public_ip_on_launch = true
